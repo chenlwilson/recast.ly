@@ -3,3 +3,7 @@ ReactDOM.render(
   <App videos={window.exampleVideoData}/>,
   document.getElementById('app')
 );
+
+console.log(window.exampleVideoData);
+
+
