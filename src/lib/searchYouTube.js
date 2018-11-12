@@ -1,5 +1,5 @@
 var searchYouTube = (option, callback) => {
-  // TODO{query ='tennis', max = 5, key = window.YOUTUBE_API_KEY}, function(data) {console.log(data)}
+  // input: {query ='tennis', max = 5, key = window.YOUTUBE_API_KEY}, function(data) {console.log(data)}
 
   $.ajax({
         url: 'https://www.googleapis.com/youtube/v3/search',
@@ -21,7 +21,6 @@ var searchYouTube = (option, callback) => {
           console.log('Youtube: Failed to fetch messages', error);
         }
       });
-  // console.log('Hi');
 };
 
 window.searchYouTube = searchYouTube;
