@@ -1,17 +1,9 @@
 var searchYouTube = (option, callback) => {
   // TODO{query ='tennis', max = 5, key = window.YOUTUBE_API_KEY}, function(data) {console.log(data)}
-  var data = {
-    part: 'snippet',
-    order: 'relevance',
-    q: 'tennis',
-    maxResults: 5,
-    videoEmbeddable: true,
-    key: window.YOUTUBE_API_KEY
-  }
 
   $.ajax({
         url: 'https://www.googleapis.com/youtube/v3/search',
-        method: 'GET',
+        type: 'GET',
         data: {
           part: 'snippet',
           order: 'relevance',
