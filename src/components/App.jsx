@@ -1,9 +1,12 @@
 class App extends React.Component {
   constructor (props) {
     super(props);
+    this.changeCurrentVideo=this.changeCurrentVideo.bind(this);
+    this.changeVideoList=this.changeVideoList.bind(this);
+    this.searchVideo=this.searchVideo.bind(this);
     this.state = {
-      allVideos: props.videos,
-      currentVideo: props.videos[0]
+      allVideos: window.exampleVideoData,
+      currentVideo: window.exampleVideoData[0]
     };
   }
 
@@ -15,8 +18,18 @@ class App extends React.Component {
 
   changeVideoList(list) {
     this.setState({
-      allVideos: list
+      allVideos: list,
+      currentVideo: list[0]
     })
+  }
+
+  searchVideo(query) {
+    var youtubeQuery = {
+      query: query,
+      max: 5,
+      key: window.YOUTUBE_API_KEY
+    }
+    searchYouTube(youtubeQuery, this.changeVideoList);
   }
 
   render() {
@@ -24,7 +37,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search searchVideo={this.searchVideo}/>
           </div>
         </nav>
         <div className="row">
@@ -32,7 +45,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.allVideos} clickVideo={this.changeCurrentVideo.bind(this)}/>
+            <VideoList videos={this.state.allVideos} clickVideo={this.changeCurrentVideo}/>
           </div>
         </div>
       </div>
