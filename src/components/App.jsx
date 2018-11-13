@@ -2,15 +2,21 @@ class App extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      currentVideo: props.videos[0],
-      allVideos: props.videos
+      allVideos: props.videos,
+      currentVideo: props.videos[0]
     };
   }
 
-  handleVideoClick(video) {
+  changeCurrentVideo(video) {
     this.setState({
-      currentVideo: video,
+      currentVideo: video
     });
+  }
+
+  changeVideoList(list) {
+    this.setState({
+      allVideos: list
+    })
   }
 
   render() {
@@ -18,7 +24,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <div><h5><em>search</em> view goes here</h5></div>
+            <Search />
           </div>
         </nav>
         <div className="row">
@@ -26,7 +32,7 @@ class App extends React.Component {
             <VideoPlayer video={this.state.currentVideo}/>
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.allVideos} videoClick={this.handleVideoClick.bind(this)}/>
+            <VideoList videos={this.state.allVideos} clickVideo={this.changeCurrentVideo.bind(this)}/>
           </div>
         </div>
       </div>
