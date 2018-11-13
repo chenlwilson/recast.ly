@@ -4,7 +4,7 @@ var Search = () => (
       <em>
         <div className="search-bar form-inline">
             <input className="form-control" type="text"/>
-            <button className="btn hidden-sm-down" onClick={()=>{searchYouTube({query:'tennis', max: 5, key: window.YOUTUBE_API_KEY}, function(item) {console.log(item)})}}>
+            <button className="btn hidden-sm-down" onClick={()=>{searchYouTube({query:$('.form-control').val(), max: 5, key: window.YOUTUBE_API_KEY}, function(item) {console.log(item); $('.form-control').val("")})}}>
               <span className="glyphicon glyphicon-search"></span>
             </button>
          </div>
