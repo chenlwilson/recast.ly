@@ -2,16 +2,12 @@
 //Complete creating reusable API helper
 var Search = (props) => (
   <div>
-    <h5>
-      <em>
-        <div className="search-bar form-inline">
-          <input className="form-control" type="text"/>
-          <button className="btn hidden-sm-down" onClick={()=>{ props.searchVideo($('.form-control').val()); }}>
-            <span className="glyphicon glyphicon-search"></span>
-          </button>
-        </div>
-      </em>
-    </h5>
+    <div className="search-bar form-inline">
+      <input className="form-control" type="text" onChange={(event)=>{ props.searchVideo(event.target.value); }} />
+      <button className="btn hidden-sm-down" onClick={()=>{ props.searchVideo(this.state.query); }}>
+        <span className="glyphicon glyphicon-search"></span>
+      </button>
+    </div>
   </div>
 );
 

@@ -6,12 +6,13 @@ class App extends React.Component {
     this.searchVideo = this.searchVideo.bind(this);
     this.state = {
       allVideos: window.exampleVideoData,
-      currentVideo: window.exampleVideoData[0]
+      currentVideo: window.exampleVideoData[0],
+      query: 'tennis'
     };
   }
 
   componentDidMount() {
-    this.searchVideo('tennis');
+    this.searchVideo(this.state.query);
   }
 
   changeCurrentVideo(video) {
@@ -23,7 +24,7 @@ class App extends React.Component {
   changeVideoList(list) {
     this.setState({
       allVideos: list,
-      currentVideo: list[0]
+      currentVideo: list[0],
     });
   }
 
@@ -33,15 +34,19 @@ class App extends React.Component {
       max: 5,
       key: this.props.apiKey
     };
+    this.setState({query: query});
     this.props.searchYouTube(youtubeQuery, this.changeVideoList);
   }
 
   render() {
+
+    var searchVideo = _.debounce((e) => { this.searchVideo(e); }, 500);
+
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search searchVideo={this.searchVideo}/>
+            <Search searchVideo={searchVideo} />
           </div>
         </nav>
         <div className="row">
