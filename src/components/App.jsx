@@ -1,13 +1,17 @@
 class App extends React.Component {
   constructor (props) {
     super(props);
-    this.changeCurrentVideo=this.changeCurrentVideo.bind(this);
-    this.changeVideoList=this.changeVideoList.bind(this);
-    this.searchVideo=this.searchVideo.bind(this);
+    this.changeCurrentVideo = this.changeCurrentVideo.bind(this);
+    this.changeVideoList = this.changeVideoList.bind(this);
+    this.searchVideo = this.searchVideo.bind(this);
     this.state = {
       allVideos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0]
     };
+  }
+
+  componentDidMount() {
+    this.searchVideo('tennis');
   }
 
   changeCurrentVideo(video) {
@@ -20,7 +24,7 @@ class App extends React.Component {
     this.setState({
       allVideos: list,
       currentVideo: list[0]
-    })
+    });
   }
 
   searchVideo(query) {
@@ -28,7 +32,7 @@ class App extends React.Component {
       query: query,
       max: 5,
       key: window.YOUTUBE_API_KEY
-    }
+    };
     searchYouTube(youtubeQuery, this.changeVideoList);
   }
 
