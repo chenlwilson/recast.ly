@@ -1,4 +1,5 @@
 //Complete connecting app to the YouTube API
+//Complete creating reusable API helper
 var Search = (props) => (
   <div>
     <h5>
