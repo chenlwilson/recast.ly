@@ -31,9 +31,9 @@ class App extends React.Component {
     var youtubeQuery = {
       query: query,
       max: 5,
-      key: window.YOUTUBE_API_KEY
+      key: this.props.apiKey
     };
-    searchYouTube(youtubeQuery, this.changeVideoList);
+    this.props.searchYouTube(youtubeQuery, this.changeVideoList);
   }
 
   render() {
