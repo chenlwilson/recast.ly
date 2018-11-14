@@ -34,8 +34,10 @@ class App extends React.Component {
       max: 5,
       key: this.props.apiKey
     };
-    this.setState({query: query});
     this.props.searchYouTube(youtubeQuery, this.changeVideoList);
+    this.setState({
+      query: query
+    });
   }
 
   render() {
@@ -46,7 +48,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search searchVideo={searchVideo} />
+            <Search searchVideo={searchVideo} query={this.state.query}/>
           </div>
         </nav>
         <div className="row">
