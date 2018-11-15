@@ -38,7 +38,9 @@ body {
 }
 
 .video-player {
+  padding: 10px;
   margin-left: 20px;
+  background: #fff;
 }
 
 .video-player-details {
@@ -88,6 +90,17 @@ h5 {
   border: 2px solid #ede8e8;
   text-align: center;
   padding: 10px;
+}
+
+.details {
+  font-size: 12px;
+  font-weight: bold;
+  color: #999;
+}
+
+.details:hover{
+  color: #e62117;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {
