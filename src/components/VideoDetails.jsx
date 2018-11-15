@@ -1,5 +1,6 @@
 var VideoDetails = (props) => (
   <div className="video-player">
+    <h3>{props.video.snippet.title}</h3>
     <div>{props.video.snippet.description}</div>
     <div>Published on {props.video.snippet.publishedAt.split('T')[0]}</div>
     <div>Channel: {props.video.snippet.channelTitle}</div>

@@ -9,12 +9,14 @@ class App extends React.Component {
     this.showVideoDetails = this.showVideoDetails.bind(this);
     this.showMoreDetails = this.showMoreDetails.bind(this);
     this.showLessDetails = this.showLessDetails.bind(this);
+    this.toggleAutoplay = this.toggleAutoplay.bind(this);
 
     this.state = {
       allVideos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0],
       query: 'tennis',
-      showDetails: false
+      showDetails: false,
+      autoplayOn: false
     };
   }
 
@@ -62,13 +64,23 @@ class App extends React.Component {
     this.setState({showDetails: false});
   }
 
+  toggleAutoplay() {
+    this.setState({autoplayOn: !this.state.autoplayOn});
+  }
+
   render() {
 
     let searchVideo = _.debounce((e) => { this.searchVideo(e); }, 500);
-    let videoDetails;
+    let videoDetails, videoPlayer;
 
     if (this.state.showDetails) {
       videoDetails = <VideoDetails showLessDetails={this.showLessDetails} video={this.state.currentVideo}/>;
+    }
+
+    if (this.state.autoplayOn) {
+      videoPlayer = <VideoPlayerAutoOn showVideoDetails={this.showVideoDetails} video={this.state.currentVideo}/>;
+    } else {
+      videoPlayer = <VideoPlayerAutoOff showVideoDetails={this.showVideoDetails} video={this.state.currentVideo}/>;
     }
 
     return (
@@ -80,7 +92,8 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer showVideoDetails={this.showVideoDetails} video={this.state.currentVideo}/>
+            {videoPlayer}
+            <ToggleButton toggleAutoplay={this.toggleAutoplay}/>
             {videoDetails}
           </div>
           <div className="col-md-5">
