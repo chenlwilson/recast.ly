@@ -1,13 +1,18 @@
 class App extends React.Component {
   constructor (props) {
+
     super(props);
+
     this.changeCurrentVideo = this.changeCurrentVideo.bind(this);
     this.changeVideoList = this.changeVideoList.bind(this);
     this.searchVideo = this.searchVideo.bind(this);
+    this.getVideoDetails = this.getVideoDetails.bind(this);
+
     this.state = {
       allVideos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0],
-      query: 'tennis'
+      query: 'tennis',
+      showDetails: false
     };
   }
 
@@ -40,9 +45,23 @@ class App extends React.Component {
     });
   }
 
+  getVideoDetails(video) {
+    this.props.getVideoDetails({
+      id: this.state.currentVideo.id.videoId,
+      key: this.props.apiKey
+    });
+  }
+
   render() {
 
-    var searchVideo = _.debounce((e) => { this.searchVideo(e); }, 500);
+    let searchVideo = _.debounce((e) => { this.searchVideo(e); }, 500);
+    let videoDetails;
+
+    if (this.state.showDetails) {
+      videoDetails = <VideoDetails showDetails={this.state.showDetails} video={this.state.currentVideo}/>;
+    } else {
+      videoDetails = <VideoPlayer showDetails={this.state.showDetails} video={this.state.currentVideo}/>;
+    }
 
     return (
       <div>
@@ -53,7 +72,7 @@ class App extends React.Component {
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.currentVideo}/>
+            {videoDetails}
           </div>
           <div className="col-md-5">
             <VideoList videos={this.state.allVideos} clickVideo={this.changeCurrentVideo}/>
