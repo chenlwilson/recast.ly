@@ -10,13 +10,15 @@ class App extends React.Component {
     this.showMoreDetails = this.showMoreDetails.bind(this);
     this.showLessDetails = this.showLessDetails.bind(this);
     this.toggleAutoplay = this.toggleAutoplay.bind(this);
+    this.nextPageVideo = this.nextPageVideo.bind(this);
 
     this.state = {
       allVideos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0],
       query: 'tennis',
       showDetails: false,
-      autoplayOn: false
+      autoplayOn: false,
+      pageToken: ''
     };
   }
 
@@ -30,10 +32,11 @@ class App extends React.Component {
     });
   }
 
-  changeVideoList(list) {
+  changeVideoList(data) {
     this.setState({
-      allVideos: list,
-      currentVideo: list[0],
+      allVideos: data.items,
+      currentVideo: data.items[0],
+      pageToken: data.nextPageToken
     });
   }
 
@@ -45,7 +48,7 @@ class App extends React.Component {
     };
     this.props.searchYouTube(youtubeQuery, this.changeVideoList);
     this.setState({
-      query: query
+      query: query,
     });
   }
 
@@ -66,6 +69,14 @@ class App extends React.Component {
 
   toggleAutoplay() {
     this.setState({autoplayOn: !this.state.autoplayOn});
+  }
+
+  nextPageVideo() {
+    this.props.getNextPage({
+      pageToken: this.state.pageToken,
+      key: this.props.apiKey,
+      query: this.state.query
+    }, this.changeVideoList);
   }
 
   render() {
@@ -97,7 +108,7 @@ class App extends React.Component {
             {videoDetails}
           </div>
           <div className="col-md-5">
-            <VideoList videos={this.state.allVideos} clickVideo={this.changeCurrentVideo}/>
+            <VideoList videos={this.state.allVideos} clickVideo={this.changeCurrentVideo} nextPageVideo={this.nextPageVideo}/>
           </div>
         </div>
       </div>
