@@ -38,7 +38,8 @@ class App extends React.Component {
     this.setState({
       allVideos: data.items,
       currentVideo: data.items[0],
-      pageToken: data.nextPageToken
+      pageToken: data.nextPageToken,
+      showDetails: false
     });
   }
 
@@ -86,7 +87,7 @@ class App extends React.Component {
 
   render() {
 
-    let searchVideo = _.debounce((e) => { this.searchVideo(e); }, 500);
+    let searchVideo = _.debounce((e) => { this.searchVideo(e); }, 700);
     let videoDetails, videoPlayer;
 
     if (this.state.showDetails) {
