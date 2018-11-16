@@ -5,7 +5,7 @@ var VideoList = (props) => (
         <VideoListEntry video={item} key={item.id.videoId} clickVideo={props.clickVideo}/>
       )}
     </div>
-    <div onClick={()=>{ props.nextPageVideo(); }}>
+    <div className='details' onClick={()=>{ props.nextPageVideo(); }}>
       <em>next page</em>
     </div>
   </div>

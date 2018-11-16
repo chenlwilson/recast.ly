@@ -5,12 +5,11 @@ var getVideoDetails = (options, callback) => {
 
   $.get('https://www.googleapis.com/youtube/v3/videos', {
     id: options.id,
-    part: 'snippet',
+    part: 'snippet, statistics',
     key: options.key,
   })
     .done(function(data) {
       console.log('success: fetched more video details');
-      console.log(data);
       callback(data.items[0]);
     })
     .fail(function(data) {

@@ -15,8 +15,9 @@ class App extends React.Component {
     this.state = {
       allVideos: window.exampleVideoData,
       currentVideo: window.exampleVideoData[0],
-      query: 'tennis',
+      query: 'cute dogs',
       showDetails: false,
+      videoDetails: window.exampleVideoData[0],
       autoplayOn: false,
       pageToken: ''
     };
@@ -28,7 +29,8 @@ class App extends React.Component {
 
   changeCurrentVideo(video) {
     this.setState({
-      currentVideo: video
+      currentVideo: video,
+      showDetails: false
     });
   }
 
@@ -59,8 +61,11 @@ class App extends React.Component {
     }, this.showMoreDetails);
   }
 
-  showMoreDetails() {
-    this.setState({showDetails: true});
+  showMoreDetails(item) {
+    this.setState({
+      showDetails: true,
+      videoDetails: item
+    });
   }
 
   showLessDetails() {
@@ -85,7 +90,7 @@ class App extends React.Component {
     let videoDetails, videoPlayer;
 
     if (this.state.showDetails) {
-      videoDetails = <VideoDetails showLessDetails={this.showLessDetails} video={this.state.currentVideo}/>;
+      videoDetails = <VideoDetails showLessDetails={this.showLessDetails} video={this.state.videoDetails}/>;
     }
 
     if (this.state.autoplayOn) {

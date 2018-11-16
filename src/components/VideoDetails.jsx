@@ -2,6 +2,9 @@ var VideoDetails = (props) => (
   <div className="video-player">
     <h3>{props.video.snippet.title}</h3>
     <div>{props.video.snippet.description}</div>
+    <div>{props.video.statistics.viewCount} views</div>
+    <div>{props.video.statistics.likeCount} likes</div>
+    <div>{props.video.statistics.commentCount} comments</div>
     <div>Published on {props.video.snippet.publishedAt.split('T')[0]}</div>
     <div>Channel: {props.video.snippet.channelTitle}</div>
     <div>Category Index: {props.video.snippet.categoryId}</div>
